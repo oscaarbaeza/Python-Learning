@@ -18,3 +18,5 @@ mejorar en la concentracion. Lo de la bosagra lo
 hice y los sentia q flipas como se extiraba, hay q
 practicar mas eso
 """
+
+e
