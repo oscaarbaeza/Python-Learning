@@ -146,5 +146,3 @@ Espalda: 1
 Bíceps: 2
 Hombro: 1 
 Antebrazo: 0
-
-e
