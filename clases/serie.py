@@ -1,18 +1,38 @@
 class Serie:
-    def __init__(self, peso, repes, seg, izq, der):
+    def __init__(self, numero="", peso=0, repes=0, seg=0, izq=0, der=0):
+        self.numero = numero
         self.peso = peso
         self.repes = repes
         self.seg = seg
         self.izq = izq
         self.der = der
 
-    def volumen_serie(serie):
+    def volumen_serie(self):
+        if self.izq != 0:
+            return float(self.repes) * float(self.izq)
+        if self.der != 0:
+            return float(self.repes) * float(self.der)
 
-        if "s" in serie:
-            return float(serie[1])
+        return float(self.peso) * float(self.repes)
 
-        posicion = serie.index("/")
-        peso = serie[posicion - 1]
-        reps = serie[posicion + 1]
+    def getInfo(self):
+        print(
+            self.numero
+            + " "
+            + str(self.peso)
+            + "kg-"
+            + str(self.repes)
+            + "rps-"
+            + str(self.seg)
+            + "s-"
+            + str(self.izq)
+            + "kgIzq-"
+            + str(self.der)
+            + "kgDer"
+        )
 
-        return float(peso) * float(reps)
+    def getSegundos(self):
+        return self.seg
+
+    def getPeso(self):
+        return self.peso
