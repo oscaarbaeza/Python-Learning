@@ -50,7 +50,7 @@ for training in lista_entrenos:
         for serie in ejercicio.getSeries():
             # serie.getInfo()
             if serie.getSegundos() != 0:
-                total_volumen_ejercicio += serie.getSegundos()
+                total_volumen_ejercicio += float(serie.getSegundos())
             else:
                 total_volumen_ejercicio += serie.volumen_serie()
 
@@ -63,7 +63,7 @@ print(diccionario_entrenos)
 
 for ejercicio, series in diccionario_entrenos.items():
     # Voy a ordenar por fecha los entrenos.
-    series_ordenadas = sorted(series, key=lambda x: datetime.strptime(x[1], "%d %b %Y"))
+    series_ordenadas = sorted(series, key=lambda x: datetime.strptime(x[1], "%d/%m/%Y"))
     eje_y, eje_x = zip(*series_ordenadas)
     plt.title(ejercicio)
     plt.bar(eje_x, eje_y)

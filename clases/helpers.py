@@ -10,13 +10,8 @@ def entreno_maker(sesion, numeros_emojis):
         linea_dividida = linea.split()
 
         # Añadir lectura de fechas
-        # Me acabo de dar cuenta que la fecha está en el nombre
-        # del archivo, es mejor cogerla de ahí, para asegurar y evitar errores.
-        # PENDIENTE
         if "📅" in linea_dividida:
-            linea_dividida.pop(0)
-            linea_dividida.pop(0)
-            fecha = " ".join(linea_dividida)
+            fecha = linea_dividida[-1]
             entrenamiento.fecha = fecha
 
         # Añadir lectura de tipo de entreno
@@ -39,7 +34,7 @@ def entreno_maker(sesion, numeros_emojis):
 
         serie = Serie()
 
-        if any(s in linea_dividida for s in ("S1:", "S2:", "S3:", "S4:")):
+        if any(s in linea_dividida for s in ("S1:", "S2:", "S3:", "S4:", "🧪:")):
             if "s" in linea_dividida:
                 if "/" in linea_dividida:
                     # Aquí segundos con kg
@@ -56,11 +51,22 @@ def entreno_maker(sesion, numeros_emojis):
             else:
                 posicion = linea_dividida.index("/")
                 serie.peso = linea_dividida[posicion - 1]
-                serie.repes = linea_dividida[posicion + 1]
+
+                # Comprobar si hay series rp y si no, hacerlo como siempre
+                if "+" in linea_dividida[posicion + 1]:
+                    lista_repes = (linea_dividida[posicion + 1]).split("+")
+                    serie.repes = lista_repes[0]
+                else:
+                    serie.repes = linea_dividida[posicion + 1]
                 serie.numero = linea_dividida[0]
                 ejercicio_actual.series.append(serie)
 
-        if "izq:" in linea_dividida or "der:" in linea_dividida:
+        if (
+            "izq:" in linea_dividida
+            or "der:" in linea_dividida
+            or ("izq" in linea_dividida and "🧪:" in linea_dividida)
+            or ("der" in linea_dividida and "🧪:" in linea_dividida)
+        ):
             try:
                 posicion = linea_dividida.index("/")
                 serie.peso = linea_dividida[posicion - 1]
