@@ -2,4 +2,4 @@ From all those who want to see real progress in the gym, and not abstract one. I
 
 For using this repository, you just need:
 1. Clone the repository on your computer.
-2. Write "uv sync" to create the .env with all the dependencies needed.
+2. Write "uv sync" to create the .venv with all the dependencies needed.
